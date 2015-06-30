@@ -144,7 +144,10 @@ namespace PersonMasterInstallers
             try
             {
                 DatabaseSetupInfo databaseSetupInfo = DatabaseSetupInfo.CreateFromFeature(session, "PM");
-                string sql = Properties.Resources.crebas;
+                string sql = Properties.Resources.crebas
+                    + Environment.NewLine + "GO" + Environment.NewLine
+                    + Properties.ResourcesExtensions.AllStoredProceduresSQL;
+
                 sql = sql.Replace("<pm-cryptpassword>", databaseSetupInfo.EncryptionKey);
                 sql = sql.Replace("<pm-namespace>", databaseSetupInfo.Domain);
 

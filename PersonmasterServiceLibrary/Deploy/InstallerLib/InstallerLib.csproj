@@ -77,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\patchbas_1_2.sql" />
+    <Content Include="Resources\patchbas_2_2.sql" />
     <Content Include="Resources\patchbas_2_0.sql" />
     <Content Include="Resources\spGK_PM_GetObjectIDsFromCPRArray.sql" />
   </ItemGroup>
