@@ -51,12 +51,6 @@
     <Compile Include="Conditions.wxs" />
   </ItemGroup>
   <ItemGroup>
-    <WixLibrary Include="WixCommon">
-      <HintPath>..\..\..\..\..\Core\Output\WixCommon.wixlib</HintPath>
-      <Name>WixCommon</Name>
-    </WixLibrary>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Bitmaps" />
     <Folder Include="Resources" />
   </ItemGroup>
@@ -85,6 +79,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="en-us.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixLibrary Include="WixCommon">
+      <HintPath>..\..\..\..\broker.github\PART\Source\Core\Output\WixCommon.wixlib</HintPath>
+      <Name>WixCommon</Name>
+    </WixLibrary>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
