@@ -130,12 +130,37 @@ namespace PersonMasterInstallers.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to -- Create new column
-        ///IF NOT EXISTS (SELECT * FROM sys.tables t INNER JOIN sys.columns c on t.object_id = c.object_id AND t.name = &apos;T_PM_CPR&apos; AND c.name = &apos;InCprBroker&apos;)
-        ///	ALTER TABLE T_PM_CPR Add InCprBroker BIT DEFAULT 0.
+        ///IF NOT EXISTS (SELECT * FROM sys.tables t INNER JOIN sys.columns c on t.object_id = c.object_id AND t.name = &apos;T_PM_CPR&apos; AND c.name = &apos;inCprBroker&apos;)
+        ///	ALTER TABLE T_PM_CPR Add inCprBroker BIT.
         /// </summary>
         public static string patchbas_2_2 {
             get {
                 return ResourceManager.GetString("patchbas_2_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to if exists (select 1
+        ///          from sysobjects
+        ///          where  id = object_id(&apos;spGK_PM_GetObjectIDFromCPR&apos;)
+        ///          and type in (&apos;P&apos;,&apos;PC&apos;))
+        ///   drop procedure spGK_PM_GetObjectIDFromCPR
+        ///go
+        ///
+        ///CREATE PROCEDURE spGK_PM_GetObjectIDFromCPR
+        ///    @context            VARCHAR(1020),
+        ///    @cprNo              VARCHAR(10),
+        ///    @objectOwnerID      uniqueidentifier,
+        ///    @objectID           uniqueidentifier    OUTPUT,
+        ///    @aux                VARCHAR(1020)       OUTPUT
+        ///AS
+        ///BEGIN TRY
+        ///    SET NOCOUNT ON
+        ///    SET  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string spGK_PM_GetObjectIDFromCPR {
+            get {
+                return ResourceManager.GetString("spGK_PM_GetObjectIDFromCPR", resourceCulture);
             }
         }
         

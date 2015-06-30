@@ -9,6 +9,7 @@ namespace PersonMasterInstallers.Properties
             get
             {
                 var arr = new string[]{
+                    Resources.spGK_PM_GetObjectIDFromCPR,
                     Resources.spGK_PM_GetObjectIDsFromCPRArray
                 };
 
