@@ -318,7 +318,12 @@ namespace PersonMasterInstallers
                 patchInfos["PM"] = new DatabasePatchInfo[]{
                     new DatabasePatchInfo(new Version(1,2), Properties.Resources.patchbas_1_2, null),
                     new DatabasePatchInfo(new Version(2,0), Properties.Resources.patchbas_2_0, null),
-                    new DatabasePatchInfo(new Version(2,2), Properties.ResourcesExtensions.AllStoredProceduresSQL, null)
+                    new DatabasePatchInfo(new Version(2,2), 
+                        Properties.Resources.patchbas_2_2
+                        + Environment.NewLine + "GO"+ Environment.NewLine
+                        + Properties.ResourcesExtensions.AllStoredProceduresSQL
+                        , 
+                        null)
                 };
                 return DatabaseCustomAction.PatchDatabase(session, patchInfos);
             }

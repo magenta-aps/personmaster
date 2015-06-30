@@ -137,7 +137,7 @@ BEGIN TRY
 		SET @RetVal = -12
 		INSERT INTO T_PM_CPR 
 		SELECT EncryptByKey(key_GUID('CprNoEncryptKey'), CprNo),* 
-		FROM (SELECT DISTINCT Birthdate, Gender, ObjectID, @Now as D, CprNo
+		FROM (SELECT DISTINCT Birthdate, Gender, ObjectID, @Now as D, CprNo, 1 AS InCprBroker
 			FROM @ReturnTable 
 			WHERE Gender >= 0
 				AND Existing = 0

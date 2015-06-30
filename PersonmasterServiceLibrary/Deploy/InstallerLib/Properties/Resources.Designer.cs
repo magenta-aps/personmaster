@@ -129,6 +129,17 @@ namespace PersonMasterInstallers.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to -- Create new column
+        ///IF NOT EXISTS (SELECT * FROM sys.tables t INNER JOIN sys.columns c on t.object_id = c.object_id AND t.name = &apos;T_PM_CPR&apos; AND c.name = &apos;InCprBroker&apos;)
+        ///	ALTER TABLE T_PM_CPR Add InCprBroker BIT DEFAULT 0.
+        /// </summary>
+        public static string patchbas_2_2 {
+            get {
+                return ResourceManager.GetString("patchbas_2_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to if exists (select 1
         ///          from sysobjects
         ///          where  id = object_id(&apos;spGK_PM_GetObjectIDsFromCPRArray&apos;)
