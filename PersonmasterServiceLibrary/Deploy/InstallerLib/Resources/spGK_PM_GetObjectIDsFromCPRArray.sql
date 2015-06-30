@@ -96,12 +96,16 @@ BEGIN TRY
 	SET @RetVal = -9
 	-- Existing ObjectIDs
 	UPDATE RET	
-	SET ObjectID = pm.ObjectID, Existing = 1
-	FROM @ReturnTable RET, T_PM_CPR cpr, T_PM_PersonMaster pm
-	WHERE 
-			RET.Gender >= 0
-			AND cpr.cprNo = RET.CprNo
-			AND     cpr.personMasterID = pm.objectID
+	SET ObjectID = TT.objectID, Existing = 1
+	FROM @ReturnTable RET
+	CROSS APPLY 
+	(
+		SELECT TOP 1 pm.objectId
+		FROM T_PM_CPR cpr INNER JOIN T_PM_PersonMaster pm ON cpr.personMasterID = pm.objectID
+		WHERE cpr.cprNo = RET.CprNo
+		ORDER BY CAST(inCprBroker AS TINYINT) DESC, encryptedCprNo DESC
+	) AS TT
+	WHERE RET.Gender >= 0
 	
 	SET @RetVal = -10
 	
