@@ -84,7 +84,7 @@ BEGIN TRY
         
         BEGIN TRAN
             INSERT INTO T_PM_PersonMaster VALUES (@ObjectID, @objectOwnerID, GETDATE())
-            INSERT INTO T_PM_CPR VALUES (EncryptByKey(key_GUID('CprNoEncryptKey'), @cprNo), @birthdate, @gender, @ObjectID, GETDATE(), @cprNo)
+            INSERT INTO T_PM_CPR VALUES (EncryptByKey(key_GUID('CprNoEncryptKey'), @cprNo), @birthdate, @gender, @ObjectID, GETDATE(), @cprNo, 1)
         COMMIT TRAN
     END
     
