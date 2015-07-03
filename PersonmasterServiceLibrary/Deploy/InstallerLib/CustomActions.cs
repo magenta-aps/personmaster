@@ -354,7 +354,6 @@ namespace PersonMasterInstallers
                 };
                 Action patch_2_2 = () =>
                 {
-                    System.Diagnostics.Debugger.Launch();
                     var webInstallationInfo = WebInstallationInfo.CreateFromFeature(session, "PM");
                     var webInstallationOptions = GetWebInstallationOptions(session);
                     var configFilePath = webInstallationInfo.GetWebConfigFilePath(webInstallationOptions["PM"]);
