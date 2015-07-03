@@ -516,7 +516,15 @@ namespace PersonmasterServiceLibrary
             Dictionary<string, List<string>> errors = new Dictionary<string, List<string>>();
 
             DataSet dataSet;
-            lock ("spGK_PM_GetObjectIDsFromCPRArray-impl")
+
+            if (Properties.Settings.Default.SingleUserUuidAssignment)// Optional critical section
+            {
+                lock ("spGK_PM_GetObjectIDsFromCPRArray-impl")
+                {
+                    dataSet = spContext.ExecuteDataSet();
+                }
+            }
+            else
             {
                 dataSet = spContext.ExecuteDataSet();
             }

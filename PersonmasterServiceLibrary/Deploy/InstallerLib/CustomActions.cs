@@ -50,6 +50,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Deployment.WindowsInstaller;
 using CprBroker.Installers;
+using CprBroker.Utilities;
 using PersonMasterInstallers.Properties;
 
 namespace PersonMasterInstallers
@@ -351,10 +352,45 @@ namespace PersonMasterInstallers
                     dic["multipleSiteBindingsEnabled"] = "true";
                     CprBroker.Installers.Installation.AddSectionNode("serviceHostingEnvironment", dic, "//serviceHostingEnvironment", configFilePath, "system.serviceModel");
                 };
+                Action patch_2_2 = () =>
+                {
+                    System.Diagnostics.Debugger.Launch();
+                    var webInstallationInfo = WebInstallationInfo.CreateFromFeature(session, "PM");
+                    var webInstallationOptions = GetWebInstallationOptions(session);
+                    var configFilePath = webInstallationInfo.GetWebConfigFilePath(webInstallationOptions["PM"]);
+
+                    // Add section & group definition
+                    var sectionGroupAttributes = new Dictionary<string, string>();
+                    sectionGroupAttributes["name"] = "applicationSettings";
+                    sectionGroupAttributes["type"] = typeof(System.Configuration.ApplicationSettingsGroup).IdentifyableName();
+                    CprBroker.Installers.Installation.AddSectionNode("sectionGroup", sectionGroupAttributes, "//sectionGroup[@name='applicationSettings']", configFilePath, "//configSections");
+
+                    var sectionAttributes = new Dictionary<string, string>();
+                    sectionAttributes["name"] = "PersonmasterServiceLibrary.Properties.Settings";
+                    sectionAttributes["type"] = "System.Configuration.ClientSettingsSection, System";
+                    CprBroker.Installers.Installation.AddSectionNode("section", sectionAttributes, "//section[@name='PersonmasterServiceLibrary.Properties.Settings']", configFilePath, "//sectionGroup[@name='applicationSettings']");
+
+                    // Set default configuration value
+                    //CprBroker.Installers.Installation.SetApplicationSettingInConfigFile(configFilePath, "PersonmasterServiceLibrary.Properties.Settings", "SingleUserUuidAssignment", "False");
+                    CprBroker.Installers.Installation.AddSectionNode("applicationSettings", new Dictionary<string, string>(), "//applicationSettings", configFilePath, "//configuration");
+                    CprBroker.Installers.Installation.AddSectionNode("PersonmasterServiceLibrary.Properties.Settings", new Dictionary<string, string>(), "//PersonmasterServiceLibrary.Properties.Settings", configFilePath, "//applicationSettings");
+                    var ssDic = new Dictionary<string, string>();
+                    ssDic["name"] = "SingleUserUuidAssignment";
+                    ssDic["serializeAs"] = "String";
+                    CprBroker.Installers.Installation.AddSectionNode("setting", ssDic, "//setting[@name='SingleUserUuidAssignment']", configFilePath, "//PersonmasterServiceLibrary.Properties.Settings");
+                    CprBroker.Installers.Installation.AddSectionNode("value", new Dictionary<string, string>(), configFilePath, "//setting[@name='SingleUserUuidAssignment']");
+                    var doc = new System.Xml.XmlDocument();
+                    doc.Load(configFilePath);
+                    var settingNode = doc.SelectSingleNode("//setting[@name='SingleUserUuidAssignment']/value");
+                    settingNode.InnerText = "False";
+                    doc.Save(configFilePath);
+
+                };
 
                 var infos = new Dictionary<string, WebPatchInfo[]>();
                 infos["PM"] = new WebPatchInfo[]{
-                    new WebPatchInfo() { Version = new Version(2, 0), PatchAction = patch_2_0 }
+                    new WebPatchInfo() { Version = new Version(2, 0), PatchAction = patch_2_0 },
+                    new WebPatchInfo() { Version = new Version(2, 2), PatchAction = patch_2_2 },
                 };
 
                 return WebsiteCustomAction.PatchWebsite(session, infos);
