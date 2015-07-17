@@ -361,12 +361,12 @@ namespace PersonMasterInstallers
                     // Add section & group definition
                     var sectionGroupAttributes = new Dictionary<string, string>();
                     sectionGroupAttributes["name"] = "applicationSettings";
-                    sectionGroupAttributes["type"] = typeof(System.Configuration.ApplicationSettingsGroup).IdentifyableName() + ", Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    sectionGroupAttributes["type"] = typeof(System.Configuration.ApplicationSettingsGroup).IdentifyableName() + ", Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
                     CprBroker.Installers.Installation.AddSectionNode("sectionGroup", sectionGroupAttributes, "//sectionGroup[@name='applicationSettings']", configFilePath, "//configSections");
 
                     var sectionAttributes = new Dictionary<string, string>();
                     sectionAttributes["name"] = "PersonmasterServiceLibrary.Properties.Settings";
-                    sectionAttributes["type"] = "System.Configuration.ClientSettingsSection, System" + ", Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ;
+                    sectionAttributes["type"] = "System.Configuration.ClientSettingsSection, System" + ", Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
                     sectionAttributes["requirePermission"] = "false";
                     CprBroker.Installers.Installation.AddSectionNode("section", sectionAttributes, "//section[@name='PersonmasterServiceLibrary.Properties.Settings']", configFilePath, "//sectionGroup[@name='applicationSettings']");
 
