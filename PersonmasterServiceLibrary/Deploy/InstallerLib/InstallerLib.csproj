@@ -41,11 +41,11 @@
   <ItemGroup>
     <Reference Include="CprBroker.Installers, Version=2.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\broker.github\PART\Source\Core\Output\CprBroker.Installers.dll</HintPath>
+      <HintPath>$(CprBrokerRoot)PART\Source\Core\Output\CprBroker.Installers.dll</HintPath>
     </Reference>
     <Reference Include="CprBroker.Utilities, Version=2.2.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\broker.github\PART\Source\Core\Output\CprBroker.Utilities.dll</HintPath>
+      <HintPath>$(CprBrokerRoot)PART\Source\Core\Output\CprBroker.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Deployment.WindowsInstaller, Version=3.0.0.0, Culture=neutral, PublicKeyToken=ce35f76fcda82bad, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -82,13 +82,13 @@
   </ItemGroup>
   <ItemGroup>
     <WixLibrary Include="WixCommon">
-      <HintPath>..\..\..\..\broker.github\PART\Source\Core\Output\WixCommon.wixlib</HintPath>
+      <HintPath>$(CprBrokerRoot)PART\Source\Core\Output\WixCommon.wixlib</HintPath>
       <Name>WixCommon</Name>
     </WixLibrary>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PostBuildEvent>REM setupbld.exe -msu "$(TargetDir)en-US\$(TargetFileName)" -setup "$(ProjectDir)..\..\..\..\..\Core\Output\Setup.exe" -out "$(TargetDir)en-US\$(TargetName).exe"</PostBuildEvent>
+    <PostBuildEvent />
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.
